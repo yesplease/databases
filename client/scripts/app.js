@@ -5,7 +5,7 @@ $(function() {
   app = {
 //TODO: The current 'addFriend' function just adds the class 'friend'
 //to all messages sent by the user
-    server: 'localhost:3000/classes/',
+    server: 'http://localhost:3000/classes/',
     username: 'anonymous',
     roomname: 'lobby',
     lastMessageId: 0,
@@ -57,7 +57,7 @@ $(function() {
     },
     fetch: function(animate) {
       $.ajax({
-        url: app.server,
+        url: app.server + 'messages/',
         type: 'GET',
         contentType: 'application/json',
         // data: { order: '-createdAt'},
@@ -84,6 +84,7 @@ $(function() {
           }
         },
         error: function(data) {
+          console.log(data);
           console.error('chatterbox: Failed to fetch messages');
         }
       });
