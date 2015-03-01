@@ -21,7 +21,11 @@ app.use(parser.json());
 
 // Set up our routes
 app.use("/classes", router);
-app.use(cors());
+
+var corsOptions = {
+  method: ['GET', 'POST', 'PUT', 'DELETE']
+};
+app.use(cors(corsOptions));
 
 // Serve the client files
 app.use(express.static(__dirname + "/../client"));

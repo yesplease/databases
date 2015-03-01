@@ -40,8 +40,9 @@ $(function() {
       app.$message.val('');
 
       // POST the message to the server
+      console.log('about to post...');
       $.ajax({
-        url: app.server,
+        url: app.server + 'messages/',
         type: 'POST',
         data: JSON.stringify(data),
         contentType: 'application/json',
@@ -64,6 +65,7 @@ $(function() {
         success: function(data) {
           console.log('chatterbox: Messages fetched');
           data.results = data[0];
+
           // Don't bother if we have nothing to work with
           if (!data.results || !data.results.length) { return; }
 
@@ -72,7 +74,7 @@ $(function() {
           var displayedRoom = $('.chat span').first().data('roomname');
           app.stopSpinner();
           // Only bother updating the DOM if we have a new message
-          if (mostRecentMessage.objectId !== app.lastMessageId || app.roomname !== displayedRoom) {
+          if (mostRecentMessage.id !== app.lastMessageId || app.roomname !== displayedRoom) {
             // Update the UI with the fetched rooms
             app.populateRooms(data.results);
 
@@ -80,7 +82,7 @@ $(function() {
             app.populateMessages(data.results, animate);
 
             // Store the ID of the most recent message
-            app.lastMessageId = mostRecentMessage.objectId;
+            app.lastMessageId = mostRecentMessage.id;
           }
         },
         error: function(data) {
