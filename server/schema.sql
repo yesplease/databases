@@ -25,14 +25,6 @@ CREATE TABLE users (
 
 
 
-DROP TABLE IF EXISTS rooms;
-
-CREATE TABLE rooms (
-  roomName VARCHAR(20) NULL DEFAULT NULL,
-  PRIMARY KEY (roomName)
-);
-
-ALTER TABLE messages ADD FOREIGN KEY (roomName) REFERENCES rooms (roomName);
 ALTER TABLE messages ADD FOREIGN KEY (username) REFERENCES users (username);
 
 

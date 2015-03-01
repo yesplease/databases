@@ -6,20 +6,12 @@ db.connect();
 module.exports = {
   messages: {
     get: function (cb) {
-      var results;
-      // db.query('show databases;', function(err, rows){
-      //   if(err){
-      //     console.log('db err:' + err);
-      //     throw err;
-      //   }else{
-      //     console.log('db:', rows);
-      //     cb(rows);
-      //   }
-      // });
-      db.query('show databases;', cb)
+      db.query('select * from messages', cb);
 
     }, // a function which produces all the messages
-    post: function () {} // a function which can be used to insert a message into the database
+    post: function (cb) {
+      db.query('insert')
+    } // a function which can be used to insert a message into the database
   },
 
   users: {
@@ -27,7 +19,7 @@ module.exports = {
     get: function () {},
     post: function (obj) {
       username = obj.username;
-      db.query('insert into users (username) values ('+username+');')
+      db.query('insert into users (username) values ('+username+');');
     }
   }
 };
